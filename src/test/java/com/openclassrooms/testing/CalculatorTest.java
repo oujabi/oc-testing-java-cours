@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.text.MessageFormat;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -108,6 +111,34 @@ public class CalculatorTest {
 
 		// Assert
 		// ...
+	}
+
+	@Test
+	public void listDigits_shouldReturnsTheListOfDigits_ofPositiveInteger() {
+		// GIVEN
+		int number = 95897;
+
+		// WHEN
+		Set<Integer> actualDigits = calculatorUnderTest.digitsSet(number);
+
+		// THEN
+		assertThat(actualDigits).containsExactlyInAnyOrder(9, 5, 8, 7);
+		Set<Integer> expectedDigits = Stream.of(5, 7, 8, 9).collect(Collectors.toSet());
+		assertEquals(expectedDigits, actualDigits);
+	}
+
+	@Test
+	public void listDigits_shouldReturnsTheListOfDigits_ofNegativeInteger() {
+		int number = -124432;
+		Set<Integer> actualDigits = calculatorUnderTest.digitsSet(number);
+		assertThat(actualDigits).containsExactlyInAnyOrder(1, 2, 3, 4);
+	}
+
+	@Test
+	public void listDigits_shouldReturnsTheListOfZero_ofZero() {
+		int number = 0;
+		Set<Integer> actualDigits = calculatorUnderTest.digitsSet(number);
+		assertThat(actualDigits).containsExactly(0);
 	}
 
 }
