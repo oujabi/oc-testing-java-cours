@@ -1,5 +1,6 @@
 package com.openclassrooms.testing;
 
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.MessageFormat;
